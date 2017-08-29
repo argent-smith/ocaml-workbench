@@ -47,6 +47,7 @@ USER dev
 
 RUN opam init -a \
     && eval $(opam config env) \
+    && opam switch 4.05.0 \
     && opam install -y core utop
 
 # go out of setup mode
