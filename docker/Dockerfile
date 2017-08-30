@@ -34,36 +34,6 @@ USER dev
 
 RUN opam init -a \
     && eval $(opam config env) \
-    && opam install -y core utop
-
-USER root
-
-# locale
-RUN apt-get update \
-    && apt-get install -y -q \
-       locales \
-       tzdata \
-    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 \
-    && apt-get autoremove -y \
-    && apt-get clean -y all \
-    && rm -rf /var/lib/apt/lists/*
-
-# ocaml, opam et al.
-RUN apt-get update \
-    && apt-get install -y -q \
-       m4 \
-       opam \
-    && apt-get autoremove -y \
-    && apt-get clean -y all \
-    && rm -rf /var/lib/apt/lists/*
-
-# utop
-RUN useradd -m -s /bin/bash dev
-
-USER dev
-
-RUN opam init -a \
-    && eval $(opam config env) \
     && opam switch 4.05.0 \
     && opam install -y core utop
 
