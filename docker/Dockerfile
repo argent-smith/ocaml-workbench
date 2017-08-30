@@ -36,29 +36,8 @@ RUN opam init -a \
     && eval $(opam config env) \
     && opam install -y core utop
 
-USER root
-
-# locale
-RUN apt-get update \
-    && apt-get install -y -q \
-       locales \
-       tzdata \
-    && localedef -i ru_RU -c -f UTF-8 -A /usr/share/locale/locale.alias ru_RU.UTF-8 \
-    && apt-get autoremove -y \
-    && apt-get clean -y all \
-    && rm -rf /var/lib/apt/lists/*
-
-ENV LANG=ru_RU.UTF-8 \
-    LANGUAGE=ru_RU:UTF-8 \
-    LC_ALL=ru_RU.UTF-8
-
-# TZ
-ENV SYSTEM_TIMEZONE=Europe/Moscow
-RUN echo ${SYSTEM_TIMEZONE} > /etc/timezone \
-    && cp /usr/share/zoneinfo/${SYSTEM_TIMEZONE} /etc/localtime \
-    && dpkg-reconfigure -f noninteractive tzdata
-
 # go out of setup mode
+USER root
 RUN echo 'debconf debconf/frontend select Dialog' | debconf-set-selections
 
 # entrypoint
