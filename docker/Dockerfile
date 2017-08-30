@@ -38,6 +38,7 @@ RUN opam init -a \
     && opam install -y core utop
 
 # go out of setup mode
+USER root
 RUN echo 'debconf debconf/frontend select Dialog' | debconf-set-selections
 
 # entrypoint
