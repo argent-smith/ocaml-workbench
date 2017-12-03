@@ -1,4 +1,4 @@
-FROM armv7/armhf-ubuntu:xenial
+FROM arm32v7/debian:stretch-slim
 
 MAINTAINER Pavel Argentov (argentoff@gmail.com)
 
