@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM debian:stretch-slim
 
 MAINTAINER Pavel Argentov (argentoff@gmail.com)
 
