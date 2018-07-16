@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM arm64v8/debian:stretch-slim
 
 MAINTAINER Pavel Argentov (argentoff@gmail.com)
 
@@ -36,7 +36,8 @@ USER dev
 
 RUN opam init -a
 RUN eval $(opam config env) \
-    && opam install -y core utop
+    && opam install -y core utop \
+    && rm -rf ~/.opam/archives/*
 
 # entrypoint
 CMD ["bash", "-l", "-c", "utop"]
