@@ -1,4 +1,4 @@
-FROM arm64v8/debian:stretch-slim
+FROM debian:stretch-slim
 
 MAINTAINER Pavel Argentov (argentoff@gmail.com)
 
@@ -28,7 +28,8 @@ RUN apt-get update \
 # ocaml, opam et al.
 WORKDIR /tmp
 ENV VERSION=2.0.0-rc4
-ENV DISTFILE=opam-${VERSION}-arm64-linux
+ENV ARCH=x86_64
+ENV DISTFILE=opam-${VERSION}-${ARCH}-linux
 RUN wget -nv https://github.com/ocaml/opam/releases/download/${VERSION}/${DISTFILE} && \
     install ${DISTFILE} /usr/local/bin/opam && \
     chmod a+x /usr/local/bin/opam && \
